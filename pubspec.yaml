@@ -1,0 +1,79 @@
+name: ai_hub
+description: Speed and privacy with iOS 26 UI for Android - A unified hub for accessing multiple AI services
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.5.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # Icons
+  cupertino_icons: ^1.0.6
+
+  # WebView
+  flutter_inappwebview: ^6.0.0
+  
+  # Image Picker
+  image_picker: ^1.2.1
+  
+  # State Management
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  
+  # Storage
+  shared_preferences: ^2.5.2
+  path_provider: ^2.1.5
+  
+  # Networking
+  http: ^1.3.0
+  
+  # UI Components
+  cached_network_image: ^3.4.1
+  glassmorphism: ^3.0.0
+  
+  # Utilities
+  uuid: ^4.5.1
+  intl: ^0.20.2
+  path: ^1.9.0
+  url_launcher: ^6.3.1
+  home_widget: ^0.9.0
+  permission_handler: ^12.0.1
+  flutter_local_notifications: ^19.5.0
+  timezone: ^0.10.1
+  flutter_secure_storage: ^10.0.0
+  encrypt: ^5.0.3
+  crypto: ^3.0.7
+  gal: ^2.3.2
+  flutter_custom_tabs: ^2.0.0
+
+dependency_overrides:
+  characters: 1.4.1
+  material_color_utilities: 0.13.0
+  meta: 1.18.0
+  matcher: 0.12.18
+  test_api: 0.7.9
+  pointycastle: 4.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.3
+  mocktail: ^1.0.4
+  bloc_test: ^10.0.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: false
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+flutter:
+  uses-material-design: true
+  
+  assets:
+    - assets/icons/
+    - assets/images/
