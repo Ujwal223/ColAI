@@ -1,8 +1,8 @@
 # ColAI 🚀
 
-[![Flutter](https://img.shields.io/badge/Flutter-3.27.1-02569B?logo=flutter)](https://flutter.dev)
+[![Flutter](https://img.shields.io/badge/Flutter-3.38.7-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5.0-0175C2?logo=dart)](https://dart.dev)
-[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android)](https://www.android.com)
 
 **Speed and privacy with an iOS-inspired UI for Android.**
@@ -31,7 +31,7 @@ ColAI is built with a scalable, production-grade architecture.
 
 | Component | Technology |
 | :--- | :--- |
-| **Framework** | **Flutter** (Stable 3.27.1) |
+| **Framework** | **Flutter** (Stable 3.38.7) |
 | **State Management** | **BLoC / Cubit** (flutter_bloc) |
 | **Browser Engine** | **InAppWebView** (Custom Hardening) |
 | **Security** | **AES-256** (Dual-layer encryption) |
@@ -66,7 +66,7 @@ ColAI follows the **Clean Architecture** pattern with a reactive state layer:
 
 ### Prerequisites
 
-- Flutter SDK `^3.27.1`
+- Flutter SDK `^3.38.7`
 - Android Studio / VS Code
 - Android Device (API 26+)
 
@@ -99,7 +99,7 @@ ColAI implements a custom **Session Privacy Service** that:
 
 ColAI is a personal project maintained by **Ujwal**.
 
-**License**: This project is licensed under the [CC BY-NC 4.0](LICENSE.md) (Attribution-NonCommercial 4.0 International).
+**License**: This project is licensed under the [Apache License 2.0](LICENSE.md).
 
 > [!WARNING]
 > **No Contributions Expected**: The author does not seek or accept external contributions at this time. Unauthorized pull requests will be closed.

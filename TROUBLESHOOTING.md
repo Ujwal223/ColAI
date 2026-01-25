@@ -31,4 +31,4 @@ If you encounter issues with ColAI, please refer to this guide for common soluti
 
 ## Support
 
-As this is a personal project with a **no-contribution policy**, support is limited. However, you are welcome to use the code as permitted by the **CC BY-NC 4.0** license.
+As this is a personal project with a **no-contribution policy**, support is limited. However, you are welcome to use the code as permitted by the **Apache License 2.0**.

@@ -66,11 +66,11 @@ class AboutScreen extends StatelessWidget {
               _buildInfoRow(context, 'Developed by', 'Ujwal'),
               const SizedBox(height: 32),
               _buildSectionHeader(context, 'LEGAL'),
-              _buildInfoRow(context, 'License', 'CC BY-NC 4.0'),
+              _buildInfoRow(context, 'License', 'Apache 2.0'),
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 24),
                 child: Text(
-                  'This application is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.',
+                  'This application is licensed under the Apache License 2.0.',
                   style: TextStyle(
                     fontSize: 13,
                     color: CupertinoColors.systemGrey.resolveFrom(context),

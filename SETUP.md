@@ -55,4 +55,4 @@ This app uses encryption for local storage. The encryption keys are managed by `
 
 ## Contribution Policy
 
-Please note: **External contributions (Pull Requests) are not accepted.** This project is maintained as a personal work under the **CC BY-NC 4.0** license.
+Please note: **External contributions (Pull Requests) are not accepted.** This project is maintained as a personal work under the **Apache License 2.0**.
