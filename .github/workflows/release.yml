@@ -11,6 +11,12 @@ jobs:
     name: Build Release Artifacts
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+      ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+      ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+      ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,15 +34,30 @@ jobs:
           channel: 'stable'
           cache: true
 
+      - name: Check for Secrets
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo "::error::ANDROID_KEYSTORE_BASE64 is missing. Please add it to GitHub Secrets."
+            exit 1
+          fi
+          if [ -z "$ANDROID_KEYSTORE_PASSWORD" ]; then
+            echo "::error::ANDROID_KEYSTORE_PASSWORD is missing. Please add it to GitHub Secrets."
+            exit 1
+          fi
+
       - name: Decode Keystore
         run: |
-          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
+          if [ ! -s android/app/upload-keystore.jks ]; then
+            echo "::error::Keystore decoding failed or produced an empty file. Check your base64 string."
+            exit 1
+          fi
 
       - name: Create key.properties
         run: |
-          echo "storePassword=${{ secrets.ANDROID_KEYSTORE_PASSWORD }}" > android/key.properties
-          echo "keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }}" >> android/key.properties
-          echo "keyAlias=${{ secrets.ANDROID_KEY_ALIAS }}" >> android/key.properties
+          echo "storePassword=$ANDROID_KEYSTORE_PASSWORD" > android/key.properties
+          echo "keyPassword=$ANDROID_KEY_PASSWORD" >> android/key.properties
+          echo "keyAlias=$ANDROID_KEY_ALIAS" >> android/key.properties
           echo "storeFile=upload-keystore.jks" >> android/key.properties
 
       - name: Install dependencies
@@ -48,11 +69,14 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build Split APKs
-        run: flutter build apk --release --split-per-abi
+      - name: Build FOSS APK
+        run: flutter build apk --release --flavor foss
 
-      - name: Build Bundle (AAB)
-        run: flutter build appbundle --release
+      - name: Build Play Split APKs
+        run: flutter build apk --release --flavor play --split-per-abi
+
+      - name: Build Play Bundle (AAB)
+        run: flutter build appbundle --release --flavor play
 
       - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4

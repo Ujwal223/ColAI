@@ -52,6 +52,19 @@ android {
         }
     }
 
+    flavorDimensions "type"
+    productFlavors {
+        foss {
+            dimension "type"
+            applicationIdSuffix ".foss"
+            versionNameSuffix "-foss"
+        }
+        play {
+            dimension "type"
+            // Default configuration
+        }
+    }
+
     buildTypes {
         release {
             if (keystorePropertiesFile.exists() && keystoreProperties['storeFile'] && file(keystoreProperties['storeFile']).exists()) {
@@ -92,13 +105,11 @@ android {
     }
     
     // Split APKs by ABI for smaller downloads
-    // Generates both universal APK and architecture-specific APKs
     splits {
         abi {
             enable true
             reset()
             include 'armeabi-v7a', 'arm64-v8a', 'x86_64'
-            // Generate both universal and split APKs
             universalApk true
         }
     }

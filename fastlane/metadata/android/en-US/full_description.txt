@@ -1,0 +1,11 @@
+ColAI is the ultimate hub for all your AI needs. Stop switching between multiple apps and Browser tabs. Access all major AI services in one sleek, unified interface.
+
+Why ColAI?
+- All Your AIs in One Place: Use ChatGPT, Claude, DeepSeek, Grok, and more without leaving the app.
+- Multiple Accounts & Sessions: Log into different accounts for the same AI service and switch between them instantly. Perfect for separating work and personal projects.
+- Lightning Fast Switching: Move between different AI models with a single tap. No more reloading pages or hunting for bookmarks.
+- Premium Native Experience: Enjoy a beautiful, glassmorphic UI that feels premium and responsive.
+- Private by Design: Your sessions are isolated and private. Browse and chat with confidence.
+- Open Source: Transparent, community-driven, and free from tracking.
+
+Stop settling for clunky web views. Get the premium AI experience you deserve with ColAI.
