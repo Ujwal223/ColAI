@@ -52,7 +52,7 @@ class AboutScreen extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  'Version 0.1.1',
+                  'Version 1.0.1',
                   style: TextStyle(
                     fontSize: 16,
                     color: CupertinoColors.systemGrey.resolveFrom(context),

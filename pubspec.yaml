@@ -1,7 +1,7 @@
 name: ai_hub
 description: Speed and privacy with iOS 26 UI for Android - A unified hub for accessing multiple AI services
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

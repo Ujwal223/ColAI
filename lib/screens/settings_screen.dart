@@ -206,7 +206,7 @@ class SettingsScreen extends StatelessWidget {
             child: const Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('v0.1.1',
+                Text('v1.0.1',
                     style: TextStyle(
                         fontSize: 15, color: CupertinoColors.systemGrey)),
                 Icon(CupertinoIcons.chevron_right, size: 16),
