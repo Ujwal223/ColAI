@@ -69,23 +69,11 @@ jobs:
       - name: Run tests
         run: flutter test
 
-      - name: Build FOSS APK
-        run: flutter build apk --release --flavor foss
-
-      - name: Build Play Split APKs
-        run: flutter build apk --release --flavor play --split-per-abi
-
-      - name: Build Play Bundle (AAB)
-        run: flutter build appbundle --release --flavor play
+      - name: Build Universal APK
+        run: flutter build apk --release
 
       - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: release-apks
-          path: build/app/outputs/flutter-apk/*.apk
-
-      - name: Upload AAB Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-aab
-          path: build/app/outputs/bundle/release/*.aab
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk

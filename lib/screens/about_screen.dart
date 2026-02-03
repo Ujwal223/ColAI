@@ -81,7 +81,7 @@ class AboutScreen extends StatelessWidget {
               ),
               _buildSectionHeader(context, 'OPEN SOURCE'),
               _buildLinkRow(context, 'View Source Code',
-                  'https://github.com/placeholder/colai'),
+                  'https://github.com/Ujwal223/ColAI'),
               const SizedBox(height: 12),
               Center(
                 child: Text(

@@ -52,19 +52,6 @@ android {
         }
     }
 
-    flavorDimensions "type"
-    productFlavors {
-        foss {
-            dimension "type"
-            applicationIdSuffix ".foss"
-            versionNameSuffix "-foss"
-        }
-        play {
-            dimension "type"
-            // Default configuration
-        }
-    }
-
     buildTypes {
         release {
             if (keystorePropertiesFile.exists() && keystoreProperties['storeFile'] && file(keystoreProperties['storeFile']).exists()) {
