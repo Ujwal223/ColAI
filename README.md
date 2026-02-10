@@ -1,3 +1,4 @@
+<img width="536" height="624" alt="ChatGPT Image Feb 10, 2026, 09_24_51 AM" src="https://github.com/user-attachments/assets/554a4652-4638-481d-8761-babbe3d32f3b" />
 # ColAI 🚀
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.38.7-02569B?logo=flutter)](https://flutter.dev)
