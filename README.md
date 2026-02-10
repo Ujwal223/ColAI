@@ -1,5 +1,6 @@
 <img width="536" height="624" alt="ChatGPT Image Feb 10, 2026, 09_24_51 AM" src="https://github.com/user-attachments/assets/554a4652-4638-481d-8761-babbe3d32f3b" />
-# ColAI 🚀
+
+## ColAI 
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.38.7-02569B?logo=flutter)](https://flutter.dev)
 [![Dart](https://img.shields.io/badge/Dart-3.5.0-0175C2?logo=dart)](https://dart.dev)
@@ -12,13 +13,13 @@ ColAI is a premium Flutter-based hub that provides unified access to leading AI 
 
 ---
 
-## ✨ Why ColAI?
+##  Why ColAI?
 
 *   **Privacy-First Headers**: Automatically sends DNT (Do Not Track) and Sec-GPC headers to all AI providers.
 
 ---
 
-## 📱 Features & Showcase
+## Features & Showcase
 
 | **Unified Dashboard** | **Isolated Sessions** | **Premium Controls** |
 | :---: | :---: | :---: |
@@ -35,7 +36,7 @@ ColAI is a premium Flutter-based hub that provides unified access to leading AI 
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack & Architecture
 
 ColAI is built with a scalable, production-grade architecture.
 
@@ -50,18 +51,18 @@ ColAI is built with a scalable, production-grade architecture.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
-*   🎭 **True Multi-Session Support**: Run unlimited independent accounts per service.
-*   🔒 **Encrypted Privacy**: Your session data is locked with AES-256 encryption.
-*   📱 **Home Widget Support**: Quick-launch your favorite AI directly from the home screen.
-*   🌓 **Adaptive Themes**: Seamless transition between Light and Dark modes with system synchronization.
-*   🔽 **Offline Persistence**: Sessions persist across app restarts—stay logged in securely.
-*   🌐 **Dynamic Content Blocking**: Built-in network-level tracker and banner blocking.
+*    **True Multi-Session Support**: Run unlimited independent accounts per service.
+*    **Encrypted Privacy**: Your session data is locked with AES-256 encryption.
+*    **Home Widget Support**: Quick-launch your favorite AI directly from the home screen.
+*    **Adaptive Themes**: Seamless transition between Light and Dark modes with system synchronization.
+*    **Offline Persistence**: Sessions persist across app restarts—stay logged in securely.
+*    **Dynamic Content Blocking**: Built-in network-level tracker and banner blocking.
 
 ---
 
-## 🏗️ Core Architecture Overview
+##  Core Architecture Overview
 
 ColAI follows the **Clean Architecture** pattern with a reactive state layer:
 
@@ -72,7 +73,7 @@ ColAI follows the **Clean Architecture** pattern with a reactive state layer:
 
 ---
 
-## 🏁 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
@@ -96,7 +97,7 @@ For detailed instructions, see [SETUP.md](SETUP.md).
 
 ---
 
-## 🛡️ Security Policy
+##  Security Policy
 
 ColAI implements a custom **Session Privacy Service** that:
 - Captures and encrypts cookies per session.
@@ -105,15 +106,13 @@ ColAI implements a custom **Session Privacy Service** that:
 
 ---
 
-## 📝 License & Contributing
+##  License & Contributing
 
 ColAI is a personal project maintained by **Ujwal**.
 
 **License**: This project is licensed under the [Apache License 2.0](LICENSE.md).
 
-> [!WARNING]
-> **No Contributions Expected**: The author does not seek or accept external contributions at this time. Unauthorized pull requests will be closed.
+> [!NOTE]
+> **No Contributions Expected**: No external contributions is expected at this time. Pull requests might be ignored.
 
 ---
-
-**Motto**: *"Speed and privacy with iOS-inspired UI for Android"*
