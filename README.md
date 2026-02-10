@@ -25,6 +25,15 @@ ColAI is a premium Flutter-based hub that provides unified access to leading AI 
 | Clean access to all AI providers in one stunning grid. | Manage multiple accounts with complete data privacy. | iOS-style navigation with glassmorphism and haptic feedback. |
 
 ---
+## Screenshots
+
+![Screenshot_20260210_093220](https://github.com/user-attachments/assets/62367738-cbbf-4938-ba32-c5a47b497409)
+![Screenshot_20260210_093217](https://github.com/user-attachments/assets/48025c06-e157-406e-aff0-df494fb2ea65)
+![Screenshot_20260210_093231](https://github.com/user-attachments/assets/a773f31b-11dd-4e4e-8efc-f5dfd465edfa)
+![Screenshot_20260210_093225](https://github.com/user-attachments/assets/56e81207-0d73-46aa-a780-976d7a733b08)
+![Screenshot_20260210_093211](https://github.com/user-attachments/assets/1b0bc8d8-8cca-4df5-9751-fb01d908fea0)
+
+---
 
 ## 🛠️ Tech Stack & Architecture
 
