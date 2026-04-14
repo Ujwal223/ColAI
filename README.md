@@ -4,7 +4,7 @@
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
 [![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android)](https://www.android.com)
-[![Downloads](https://img.shields.io/github/downloads/ujwal223/focusgram/total?label=downloads&color=blue&cacheSeconds=10)](https://github.com/ujwal223/colai/releases)
+[![Downloads](https://img.shields.io/github/downloads/ujwal223/colai/total?label=downloads&color=blue&cacheSeconds=10)](https://github.com/ujwal223/colai/releases)
 
 **Speed and privacy with an iOS-inspired UI for Android.**
 
