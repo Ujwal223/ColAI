@@ -1,0 +1,67 @@
+/* ColAI Shield - High-Performance Cosmetic and Annoyance Blocking Rules */
+
+/* Cookie & Consent Notices */
+#onetrust-consent-sdk,
+#onetrust-banner-sdk,
+.onetrust-pc-dark,
+#cookie-banner,
+.cookie-banner,
+#cookie-notice,
+.cookie-notice,
+#cookie-law-info-bar,
+.cc-banner,
+.cc-window,
+.osano-cm-window,
+.osano-cm-dialog,
+#qc-cmp2-container,
+#didomi-host,
+.didomi-popup-notice,
+.truste_box_overlay,
+#truste-consent-track,
+.usercentrics-root,
+div[data-nosnippet="async"][id*="cookie"],
+div[aria-label*="cookie consent" i],
+div[aria-label*="manage cookies" i] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Mobile App Nag & Install Banners */
+/* ChatGPT install/mobile app banners */
+[data-testid*="mobile-banner"],
+[data-testid*="download-banner"],
+[data-testid*="app-banner"],
+.mobile-app-promo,
+.DownloadAppBanner,
+.MobileBanner,
+
+/* Claude "Get the app" banners */
+div:has(> a[href*="claude.ai/download"]),
+div:has(> a[href*="play.google.com/store/apps/details?id=com.anthropic.claude"]),
+div:has(> a[href*="apps.apple.com/app/claude"]),
+div[class*="banner"]:has(a[href*="/download"]),
+div[role="banner"]:has(a[href*="/download"]),
+
+/* Grok "View in the Grok app" banners */
+div:has(> a[href*="x.ai/app"]),
+div:has(> a[href*="grok.com/download"]),
+
+/* General smart app banners and store redirects */
+[class*='app-banner']:not(body):not(html):not(main):not(#root),
+[id*='app-banner']:not(body):not(html):not(main):not(#root),
+[class*='mobile-app-banner']:not(body):not(html):not(main):not(#root),
+[class*='app-upsell']:not(body):not(html):not(main):not(#root),
+a[href*='play.google.com/store/apps/details?id=com.openai.chatgpt'],
+a[href*='play.google.com/store/apps/details?id=com.anthropic'],
+a[href*='apps.apple.com/app/chatgpt'] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}

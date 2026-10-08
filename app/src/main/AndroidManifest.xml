@@ -1,0 +1,186 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".ColAIApp"
+        android:label="ColAI"
+        android:icon="@mipmap/launcher_icon"
+        android:roundIcon="@mipmap/launcher_icon"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="false"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:theme="@style/NormalTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Deep Linking for AI Services (Standard Web Intents - HTTP & HTTPS) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+
+                <!-- ChatGPT -->
+                <data android:host="chatgpt.com" />
+                <data android:host="www.chatgpt.com" />
+                <data android:host="chat.openai.com" />
+
+                <!-- Claude -->
+                <data android:host="claude.ai" />
+                <data android:host="www.claude.ai" />
+
+                <!-- DeepSeek -->
+                <data android:host="deepseek.com" />
+                <data android:host="chat.deepseek.com" />
+                <data android:host="www.deepseek.com" />
+
+                <!-- Grok -->
+                <data android:host="grok.com" />
+                <data android:host="www.grok.com" />
+                <data android:host="x.ai" />
+
+                <!-- Gemini -->
+                <data android:host="gemini.google.com" />
+                <data android:host="bard.google.com" />
+
+                <!-- Perplexity -->
+                <data android:host="perplexity.ai" />
+                <data android:host="www.perplexity.ai" />
+            </intent-filter>
+
+            <!-- App Links (Auto-verified HTTPS) -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+
+                <!-- ChatGPT -->
+                <data android:host="chatgpt.com" />
+                <data android:host="www.chatgpt.com" />
+                <data android:host="chat.openai.com" />
+
+                <!-- Claude -->
+                <data android:host="claude.ai" />
+                <data android:host="www.claude.ai" />
+
+                <!-- DeepSeek -->
+                <data android:host="deepseek.com" />
+                <data android:host="chat.deepseek.com" />
+                <data android:host="www.deepseek.com" />
+
+                <!-- Grok -->
+                <data android:host="grok.com" />
+                <data android:host="www.grok.com" />
+                <data android:host="x.ai" />
+
+                <!-- Gemini -->
+                <data android:host="gemini.google.com" />
+                <data android:host="bard.google.com" />
+
+                <!-- Perplexity -->
+                <data android:host="perplexity.ai" />
+                <data android:host="www.perplexity.ai" />
+            </intent-filter>
+
+            <!-- Custom Scheme Deep Linking (colai://) -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="colai" />
+            </intent-filter>
+
+            <!-- Text & Link Sharing from External Apps -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <!-- Image Sharing from External Apps (Single & Multiple) -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
+        </activity>
+
+        <!-- FileProvider for Sharing and Viewing Downloaded Files -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <!-- Home Screen Widget Receiver (Small) -->
+        <receiver
+            android:name="com.ujwal.colai.feature.widget.ServiceWidgetProvider"
+            android:label="ColAI Quick Access"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/service_widget_info" />
+        </receiver>
+
+        <!-- Home Screen Widget Receiver (Medium) -->
+        <receiver
+            android:name="com.ujwal.colai.feature.widget.ServiceWidgetMediumProvider"
+            android:label="ColAI Widget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/service_widget_medium_info" />
+        </receiver>
+
+    </application>
+
+    <!-- Required for API 30+ (Android 11+) -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="https" />
+        </intent>
+    </queries>
+</manifest>

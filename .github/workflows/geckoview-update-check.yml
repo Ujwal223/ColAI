@@ -1,0 +1,79 @@
+name: Scheduled GeckoView Security Update Check
+
+on:
+  schedule:
+    # Run every Monday at 04:00 UTC (weekly security cadence)
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check-geckoview-update:
+    name: Check GeckoView Updates & Notify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check for GeckoView Updates
+        id: check_update
+        run: ./scripts/check-geckoview-update.sh
+
+      - name: Notify Maintainer via Issue
+        if: steps.check_update.outputs.UPDATED == 'true'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const newVersion = "${{ steps.check_update.outputs.NEW_VERSION }}";
+            const oldVersion = "${{ steps.check_update.outputs.OLD_VERSION }}";
+            const title = `📢 GeckoView Engine Update Available: ${newVersion}`;
+            
+            // Check if notification issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              creator: 'github-actions[bot]'
+            });
+            
+            const existing = issues.data.find(issue => issue.title.includes(newVersion));
+            if (existing) {
+              console.log(`Notification issue already exists for ${newVersion}: #${existing.number}`);
+              return;
+            }
+            
+            const body = `### 🚀 Mozilla GeckoView Update Available\n\n` +
+              `- **Current In-Use Engine Version:** \`${oldVersion}\`\n` +
+              `- **Latest Available Engine Version:** \`${newVersion}\`\n\n` +
+              `A newer release of Mozilla GeckoView has been detected in the Mozilla Maven repository.\n\n` +
+              `To test and apply this update manually:\n` +
+              `1. Update \`gradle/libs.versions.toml\` with \`geckoview = "${newVersion}"\`\n` +
+              `2. Test locally: \`./gradlew testDebugUnitTest && ./gradlew assembleDebug\`\n` +
+              `3. Create a release tag when ready.\n\n` +
+              `*Automated notification by ColAI Update Monitor.*`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: body,
+              labels: ['dependencies', 'security']
+            });
+            console.log(`Created notification issue for GeckoView ${newVersion}`);
+
+      - name: Summary Notice
+        run: |
+          if [ "${{ steps.check_update.outputs.UPDATED }}" = "true" ]; then
+            echo "### ⚠️ GeckoView Update Available" >> $GITHUB_STEP_SUMMARY
+            echo "- Current: \`${{ steps.check_update.outputs.OLD_VERSION }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "- Latest: \`${{ steps.check_update.outputs.NEW_VERSION }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "Notification dispatched successfully." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "### ✅ GeckoView is Up To Date" >> $GITHUB_STEP_SUMMARY
+            echo "Engine is current. No action required." >> $GITHUB_STEP_SUMMARY
+          fi

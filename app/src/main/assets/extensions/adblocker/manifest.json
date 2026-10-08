@@ -1,0 +1,25 @@
+{
+  "manifest_version": 2,
+  "name": "ColAI Shield",
+  "version": "1.0.0",
+  "description": "High-performance built-in content and annoyance blocker for ColAI GeckoView containers",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "exclude_matches": [
+        "*://accounts.google.com/*",
+        "*://accounts.youtube.com/*",
+        "*://myaccount.google.com/*",
+        "*://appleid.apple.com/*",
+        "*://login.live.com/*",
+        "*://login.microsoftonline.com/*",
+        "*://auth.anthropic.com/*",
+        "*://*.claude.ai/login*",
+        "*://*.claude.ai/api/auth/*"
+      ],
+      "css": ["rules.css"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

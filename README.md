@@ -1,117 +1,145 @@
-<img width="536" height="624" alt="ChatGPT Image Feb 10, 2026, 09_24_51 AM" src="https://github.com/user-attachments/assets/554a4652-4638-481d-8761-babbe3d32f3b" />
+<div align="center">
 
-## ColAI 
+<img width="120" height="120" alt="ColAI Logo" src="assets/images/colai_logo.png" style="border-radius: 28px;" />
 
-[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
-[![Platform](https://img.shields.io/badge/Platform-Android-3DDC84?logo=android)](https://www.android.com)
-[![Downloads](https://img.shields.io/github/downloads/ujwal223/colai/total?label=downloads&color=blue&cacheSeconds=10)](https://github.com/ujwal223/colai/releases)
+# ColAI
 
-**Speed and privacy with an iOS-inspired UI for Android.**
+**Multi-account AI workspace on Android**
 
-ColAI is a premium Flutter-based hub that provides unified access to leading AI services (**ChatGPT, Claude, DeepSeek, Grok, Gemini, Perplexity**) with a focus on speed, privacy, and true multi-account isolation.
+An open-source Android workspace built to run multiple independent accounts on ChatGPT, Claude, Gemini, DeepSeek, Grok, and Perplexity simultaneously without cross-account tracking or session resets.
 
----
+[![License](https://img.shields.io/badge/License-Apache%202.0-24292e.svg?style=for-the-badge)](LICENSE.md)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-3DDC84.svg?style=for-the-badge&logo=android&logoColor=white)](https://developer.android.com)
+[![Release](https://img.shields.io/github/v/release/Ujwal223/ColAI?style=for-the-badge&color=0969da)](https://github.com/Ujwal223/ColAI/releases)
+[![Downloads](https://img.shields.io/github/downloads/Ujwal223/ColAI/total?style=for-the-badge&color=fa8900)](https://github.com/Ujwal223/ColAI/releases)
+[![Donate](https://img.shields.io/badge/Support-BuyMeMomo-FFDD00.svg?style=for-the-badge&logo=buymeacoffee&logoColor=black)](https://buymemomo.com/ujwal)
 
-##  Why ColAI?
-
-*   **Privacy-First Headers**: Automatically sends DNT (Do Not Track) and Sec-GPC headers to all AI providers.
-
----
-
-## Features & Showcase
-
-| **Unified Dashboard** | **Isolated Sessions** | **Premium Controls** |
-| :---: | :---: | :---: |
-| Clean access to all AI providers in one stunning grid. | Manage multiple accounts with complete data privacy. | iOS-style navigation with glassmorphism and haptic feedback. |
-
----
-## Screenshots
-
-![Screenshot_20260210_093220](https://github.com/user-attachments/assets/62367738-cbbf-4938-ba32-c5a47b497409)
-![Screenshot_20260210_093217](https://github.com/user-attachments/assets/48025c06-e157-406e-aff0-df494fb2ea65)
-![Screenshot_20260210_093231](https://github.com/user-attachments/assets/a773f31b-11dd-4e4e-8efc-f5dfd465edfa)
-![Screenshot_20260210_093225](https://github.com/user-attachments/assets/56e81207-0d73-46aa-a780-976d7a733b08)
-![Screenshot_20260210_093211](https://github.com/user-attachments/assets/1b0bc8d8-8cca-4df5-9751-fb01d908fea0)
+</div>
 
 ---
 
-## Tech Stack & Architecture
+## The Problem & The Solution
 
-ColAI is built with a scalable, production-grade architecture.
+Standard mobile browsers share cookies and storage across tabs. Switching between work, personal, and research accounts on AI platforms forces you to log in and out repeatedly or juggle multiple separate apps.
 
-| Component | Technology |
-| :--- | :--- |
-| **Framework** | **Flutter** (Stable 3.38.7) |
-| **State Management** | **BLoC / Cubit** (flutter_bloc) |
-| **Browser Engine** | **InAppWebView** (Custom Hardening) |
-| **Security** | **AES-256** (Dual-layer encryption) |
-| **Local Storage** | **SharedPreferences + Flutter Secure Storage** |
-| **Native Integration** | **Kotlin** (Android Home Widget Support) |
+**ColAI solves this at the engine level:**
+Each account runs inside an isolated **Mozilla GeckoView container** (`contextId`). Cookies, local storage, cache, and IndexedDB data are strictly partitioned per session. You can keep multiple accounts active simultaneously without data leaking between them.
 
----
-
-## Key Features
-
-*    **True Multi-Session Support**: Run unlimited independent accounts per service.
-*    **Encrypted Privacy**: Your session data is locked with AES-256 encryption.
-*    **Home Widget Support**: Quick-launch your favorite AI directly from the home screen.
-*    **Adaptive Themes**: Seamless transition between Light and Dark modes with system synchronization.
-*    **Offline Persistence**: Sessions persist across app restarts—stay logged in securely.
-*    **Dynamic Content Blocking**: Built-in network-level tracker and banner blocking.
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       ColAI Application                         │
+├─────────────────┬───────────────────────────────┬───────────────┤
+│    Personal     │             Work              │   Research    │
+│  [contextId: 1] │        [contextId: 2]         │ [contextId: 3]│
+├─────────────────┼───────────────────────────────┼───────────────┤
+│ Cookies: User A │ Cookies: User B               │ Cookies: Free │
+│ Cache: Isolated │ Cache: Isolated               │ Cache: Clean  │
+└─────────────────┴───────────────────────────────┴───────────────┘
+                                ▲
+              Mozilla GeckoView Sandboxed Engine
+```
 
 ---
 
-##  Core Architecture Overview
+## Core Capabilities
 
-ColAI follows the **Clean Architecture** pattern with a reactive state layer:
-
-1.  **UI Layer**: Cupertino-based widgets with glassmorphism decorators.
-2.  **Logic Layer (BLoC)**: Decoupled business logic for services, sessions, and theme.
-3.  **Service Layer**: Hardened privacy services, notification managers, and secure storage adapters.
-4.  **Security Layer**: Responsible for cookie interception, encryption, and env wiping.
+<table>
+  <tr>
+    <td width="50%">
+      <h3>Container Isolation</h3>
+      <ul>
+        <li><b>Hardware-level separation</b>: Powered by GeckoView isolated contexts</li>
+        <li><b>Zero data leakage</b>: Independent cookies, storage, and cache</li>
+        <li><b>Targeted clearing</b>: Wipe data for one session without affecting others</li>
+      </ul>
+    </td>
+    <td width="50%">
+      <h3>Privacy & Security</h3>
+      <ul>
+        <li><b>PIN & biometric locks</b>: Secure sensitive accounts behind 4-digit PINs</li>
+        <li><b>Master recovery key</b>: PBKDF2-hashed emergency access key</li>
+        <li><b>Encrypted backups</b>: AES-256-GCM encrypted export and restore</li>
+        <li><b>Default privacy headers</b>: Automatically broadcasts <code>DNT</code> and <code>Sec-GPC</code></li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>Custom Service Studio</h3>
+      <ul>
+        <li><b>Any web tool</b>: Add custom AI platforms or internal LLM endpoints</li>
+        <li><b>Integrated logo tools</b>: Import via file or URL with 90° rotation and square cropping</li>
+        <li><b>Instant presets</b>: Pre-configured for ChatGPT, Claude, Gemini, DeepSeek, Grok, and Perplexity</li>
+      </ul>
+    </td>
+    <td width="50%">
+      <h3>Home Screen Widgets</h3>
+      <ul>
+        <li><b>Quick Access (2x2)</b>: Voice dictation and search shortcuts</li>
+        <li><b>Bento Medium (4x2)</b>: Deep links directly into your selected account session</li>
+        <li><b>Anti-banner blocker</b>: Suppresses intrusive mobile app install banners</li>
+      </ul>
+    </td>
+  </tr>
+</table>
 
 ---
 
-##  Getting Started
+## Architecture
+
+ColAI is built natively for Android using standard components:
+
+| Layer | Implementation | Purpose |
+| :--- | :--- | :--- |
+| **User Interface** | Jetpack Compose | Declarative UI, Cupertino styling, fluid layout cards |
+| **Web Engine** | Mozilla GeckoView | Sandboxed tab contexts (`contextId`), standards compliance |
+| **Local Storage** | AndroidX Room (SQLite) | Relational storage for services, sessions, and configuration |
+| **Security** | AndroidX Security Crypto | Keystore-backed MasterKey and AES-256 encryption |
+| **Concurrency** | Kotlin Coroutines & Flow | Asynchronous I/O and reactive state pipelines |
+| **Widgets** | Android AppWidgetProvider | Native home screen widgets with deep link intents |
+
+---
+
+## Quick Start
 
 ### Prerequisites
+- Android 8.0+ (API Level 26+)
+- JDK 21
+- Android Studio or Android SDK Command-line Tools
 
-- Flutter SDK `^3.38.7`
-- Android Studio / VS Code
-- Android Device (API 26+)
+### Build Commands
 
-### Installation
+```bash
+# Clone repository
+git clone https://github.com/Ujwal223/ColAI.git
+cd ColAI
 
-1.  Clone the repository.
-2.  Install dependencies:
-    ```bash
-    flutter pub get
-    ```
-3.  Run the app:
-    ```bash
-    flutter run
-    ```
+# Build debug APK
+./gradlew assembleDebug       # Linux / macOS
+gradlew.bat assembleDebug     # Windows
 
-For detailed instructions, see [SETUP.md](SETUP.md).
+# Install onto connected device
+./gradlew installDebug
 
----
+# Build release APKs (Universal & ABI splits)
+./gradlew assembleRelease
+```
 
-##  Security Policy
-
-ColAI implements a custom **Session Privacy Service** that:
-- Captures and encrypts cookies per session.
-- Wipes the browser environment during switches.
-- Prevents cross-site tracking and hardware ID linking.
+For platform-specific environment setup and SDK instructions, see **[SETUP.md](SETUP.md)**.  
+For common issues and troubleshooting, see **[TROUBLESHOOTING.md](TROUBLESHOOTING.md)**.
 
 ---
 
-##  License & Contributing
+## Privacy Notice
 
-ColAI is a personal project maintained by **Ujwal**.
-
-**License**: This project is licensed under the [Apache License 2.0](LICENSE.md).
-
-> [!NOTE]
-> **No Contributions Expected**: No external contributions is expected at this time. Pull requests might be ignored.
+- **No telemetry or data collection**: Requests connect directly between your phone and the web services you choose to use.
+- **On-device encryption**: Sensitive preferences and keys are secured locally through Android Keystore.
+- **Open and inspectable**: Complete source code is available under the Apache 2.0 license.
 
 ---
+
+## License & Support
+
+ColAI is developed and maintained by **Ujwal** under the [Apache License 2.0](LICENSE.md).
+
+If you find this project helpful, you can [support development on BuyMeMomo](https://buymemomo.com/ujwal).
