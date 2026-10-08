@@ -5,6 +5,15 @@ on:
     tags:
       - 'v*'
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Release tag (e.g. v2.0.0)'
+        required: false
+        default: 'v2.0.0'
+      create_release:
+        description: 'Publish as GitHub Release'
+        type: boolean
+        default: true
 
 permissions:
   contents: write
@@ -78,9 +87,11 @@ jobs:
           path: release_artifacts/*.apk
 
       - name: Create GitHub Release
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.create_release != false)
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || inputs.tag_name || 'v2.0.0' }}
+          name: ColAI ${{ startsWith(github.ref, 'refs/tags/v') && github.ref_name || inputs.tag_name || 'v2.0.0' }}
           files: release_artifacts/*.apk
           generate_release_notes: true
           draft: false
