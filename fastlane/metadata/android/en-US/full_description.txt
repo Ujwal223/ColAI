@@ -1,32 +1,16 @@
-ColAI is a multi-account AI workspace on Android that lets you use multiple accounts on web-based AI services without constantly logging in and out.
+<p><b>ColAI</b> is an open-source Android workspace built to run multiple independent accounts on ChatGPT, Claude, Gemini, DeepSeek, Grok, and Perplexity simultaneously without cross-account tracking or session resets.</p>
 
-If you have separate work, personal, and project accounts on ChatGPT, Claude, Gemini, DeepSeek, Grok, or Perplexity, standard mobile browsers force you to switch accounts or use multiple separate apps. ColAI solves this by running each session in its own isolated GeckoView container.
+<p><b>The Problem:</b> Standard mobile browsers share cookies and storage across tabs. Switching between work, personal, and research accounts on AI platforms forces you to log in and out repeatedly or juggle separate apps.</p>
 
-FEATURES:
+<p><b>The Solution:</b> ColAI isolates each account inside a dedicated Mozilla GeckoView container (<code>contextId</code>). Cookies, local storage, cache, and IndexedDB data are strictly partitioned per session. You can keep multiple accounts active simultaneously with zero data leakage.</p>
 
-• Isolated Session Containers
-Each session runs in a separate isolated container context with its own cookies, local storage, and cache. You can stay logged into multiple accounts on the same AI service at the same time without cross-account tracking or session resets.
-
-• Bento Grid Dashboard
-Manage all your AI services from a clean home screen. Comes pre-configured for ChatGPT, Claude, Gemini, DeepSeek, Grok, and Perplexity. You can also add custom web services.
-
-• Custom Services with Logo Editor
-Add any web AI tool by entering its URL. Choose an icon from your device or fetch one from a link, then crop and rotate it before saving.
-
-• Biometric and PIN Protection
-Lock individual sessions behind your fingerprint or a 4-digit PIN. A master recovery key is generated when you set up your PIN so you can regain access if needed.
-
-• Home Screen Widgets
-Add widgets to your Android home screen to launch directly into a specific session of your chosen AI service, or start voice input quickly.
-
-• Privacy and Tracking Protection
-No analytics, no ads, and no background tracking servers. Sends Do Not Track (DNT) and Global Privacy Control (GPC) headers with requests, and blocks common "Install Mobile App" banners.
-
-• Per-Session Storage Controls
-Clear cookies or cached data for a single account without touching your other sessions.
-
-• Encrypted Backups
-Export your workspace configuration and saved services to an AES-256-GCM encrypted backup file protected by your password.
-
-• Clean Native Android Interface
-Built natively with Kotlin and Jetpack Compose with responsive layouts, haptic feedback, and support for system light and dark themes.
+<p><b>Key Features:</b></p>
+<ul>
+  <li><b>Container Isolation:</b> Hardware-accelerated Mozilla GeckoView engine partitions sessions with isolated context IDs.</li>
+  <li><b>Privacy by Default:</b> Broadcasts Do Not Track (DNT) and Global Privacy Control (Sec-GPC) headers automatically.</li>
+  <li><b>PIN &amp; Biometric Lock:</b> Secure individual sensitive account sessions behind biometric authentication and a 4-digit PIN.</li>
+  <li><b>Encrypted Backups:</b> Export and import your configuration and sessions securely with AES-256-GCM encryption.</li>
+  <li><b>Custom Service Studio:</b> Add custom AI platforms, self-hosted LLM endpoints, and configure custom icons and user agents.</li>
+  <li><b>Home Screen Widgets:</b> Bento widgets and quick-action shortcuts to jump directly into specific account sessions.</li>
+  <li><b>100% Free &amp; Open Source:</b> No ads, no third-party telemetry, no analytics, and no tracking.</li>
+</ul>

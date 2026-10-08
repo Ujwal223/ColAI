@@ -1,0 +1,4 @@
+Initial release of ColAI:
+• Multi-account AI workspace for Android
+• Support for ChatGPT, Claude, Gemini, DeepSeek, Grok, and Perplexity
+• Session container isolation

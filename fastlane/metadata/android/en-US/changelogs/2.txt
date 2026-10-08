@@ -1,0 +1,9 @@
+ColAI v2.0.0 Native Architecture Rewrite:
+• Native Android implementation with Jetpack Compose & Material 3
+• Isolated GeckoView tab containers with independent cookie jars
+• Zero cross-account tracking & strict privacy partitioning
+• PIN and biometric lock support for private sessions
+• AES-256-GCM encrypted backup and restore
+• Custom service studio with icon editing & presets
+• Home screen widgets with direct session deep links
+• Hardened security & Apache 2.0 release
