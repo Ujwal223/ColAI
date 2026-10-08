@@ -35,11 +35,20 @@ jobs:
         id: keystore
         env:
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || secrets.ANDROID_KEYSTORE_PASSWORD || 'android' }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || secrets.ANDROID_KEY_ALIAS || 'colai' }}
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 -d > app/release-keystore.jks
-            echo "has_keystore=true" >> $GITHUB_OUTPUT
-            echo "Signing release APKs with configured production keystore."
+            echo "$KEYSTORE_BASE64" | tr -d '\r\n ' | base64 -d > app/release-keystore.jks
+            # Verify if keystore can be opened with configured credentials
+            if keytool -list -keystore app/release-keystore.jks -storepass "$KEYSTORE_PASSWORD" > /dev/null 2>&1; then
+              echo "Keystore file and password verified successfully."
+              echo "has_keystore=true" >> $GITHUB_OUTPUT
+            else
+              echo "::warning::Keystore password or alias verification failed. Check ANDROID_KEYSTORE_BASE64, KEYSTORE_PASSWORD, and KEY_ALIAS in GitHub Secrets. Falling back to build without corrupted keystore."
+              rm -f app/release-keystore.jks
+              echo "has_keystore=false" >> $GITHUB_OUTPUT
+            fi
           else
             echo "has_keystore=false" >> $GITHUB_OUTPUT
             echo "No custom keystore found in secrets. Using standard release build configuration."
@@ -50,9 +59,9 @@ jobs:
 
       - name: Build Release APKs (Universal & ABI Splits)
         env:
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || secrets.ANDROID_KEYSTORE_PASSWORD || 'android' }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || secrets.ANDROID_KEY_ALIAS || 'colai' }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || secrets.ANDROID_KEY_PASSWORD || secrets.KEYSTORE_PASSWORD || secrets.ANDROID_KEYSTORE_PASSWORD || 'android' }}
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Locate & Verify Release APKs

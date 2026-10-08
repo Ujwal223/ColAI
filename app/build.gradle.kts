@@ -34,11 +34,26 @@ android {
     signingConfigs {
         val keystoreFile = file("release-keystore.jks")
         if (keystoreFile.exists()) {
+            val sPassword = System.getenv("KEYSTORE_PASSWORD")?.trim()?.ifEmpty { null }
+                ?: System.getenv("ANDROID_KEYSTORE_PASSWORD")?.trim()?.ifEmpty { null }
+                ?: (findProperty("KEYSTORE_PASSWORD") as? String)?.trim()?.ifEmpty { null }
+                ?: "android"
+
+            val kAlias = System.getenv("KEY_ALIAS")?.trim()?.ifEmpty { null }
+                ?: System.getenv("ANDROID_KEY_ALIAS")?.trim()?.ifEmpty { null }
+                ?: (findProperty("KEY_ALIAS") as? String)?.trim()?.ifEmpty { null }
+                ?: "colai"
+
+            val kPassword = System.getenv("KEY_PASSWORD")?.trim()?.ifEmpty { null }
+                ?: System.getenv("ANDROID_KEY_PASSWORD")?.trim()?.ifEmpty { null }
+                ?: (findProperty("KEY_PASSWORD") as? String)?.trim()?.ifEmpty { null }
+                ?: sPassword
+
             create("release") {
                 storeFile = keystoreFile
-                storePassword = System.getenv("KEYSTORE_PASSWORD") ?: System.getenv("ANDROID_KEYSTORE_PASSWORD") ?: "android"
-                keyAlias = System.getenv("KEY_ALIAS") ?: System.getenv("ANDROID_KEY_ALIAS") ?: "colai"
-                keyPassword = System.getenv("KEY_PASSWORD") ?: System.getenv("ANDROID_KEY_PASSWORD") ?: storePassword
+                storePassword = sPassword
+                keyAlias = kAlias
+                keyPassword = kPassword
             }
         }
     }
