@@ -23,8 +23,8 @@ Builds:
     scanignore:
       - settings.gradle.kts
 
-AutoUpdateMode: Version
-UpdateCheckMode: Tags
+AutoUpdateMode: None
+UpdateCheckMode: None
 CurrentVersion: 2.0.0
 CurrentVersionCode: 21
 
