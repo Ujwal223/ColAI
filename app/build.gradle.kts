@@ -87,6 +87,11 @@ android {
     }
 
 
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -161,7 +166,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
 
     // Mozilla GeckoView Engine
-    implementation(libs.mozilla.geckoview)
+    implementation(libs.mozilla.geckoview) {
+        exclude(group = "com.google.android.gms")
+    }
 
     // Room Database
     implementation(libs.androidx.room.runtime)

@@ -3,8 +3,9 @@ Categories:
   - Security
 License: Apache-2.0
 AuthorName: Ujwal
-SourceCode: https://github.com/ujwal-99/ColAI
-IssueTracker: https://github.com/ujwal-99/ColAI/issues
+SourceCode: https://github.com/Ujwal223/ColAI
+IssueTracker: https://github.com/Ujwal223/ColAI/issues
+Changelog: https://github.com/Ujwal223/ColAI/releases
 
 AutoName: ColAI
 Summary: Multi-account containerized AI workspace with GeckoView
@@ -24,7 +25,7 @@ Description: |-
   - Military-grade AES-256-GCM + PBKDF2 encrypted backup and restore
 
 RepoType: git
-Repo: https://github.com/ujwal-99/ColAI.git
+Repo: https://github.com/Ujwal223/ColAI.git
 
 Builds:
   - versionName: 2.0.0
@@ -33,9 +34,12 @@ Builds:
     subdir: app
     gradle:
       - yes
-    output: app/build/outputs/apk/release/app-universal-release.apk
+    output: build/outputs/apk/release/app-universal-release.apk
+    scanignore:
+      - settings.gradle.kts
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
 CurrentVersion: 2.0.0
 CurrentVersionCode: 2
+

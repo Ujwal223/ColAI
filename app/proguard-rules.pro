@@ -14,6 +14,7 @@
 -keep interface org.mozilla.gecko.** { *; }
 -dontwarn org.mozilla.geckoview.**
 -dontwarn org.mozilla.gecko.**
+-dontwarn com.google.android.gms.**
 
 # Keep GeckoView native JNI methods
 -keepclasseswithmembers class org.mozilla.geckoview.** {
