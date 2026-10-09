@@ -9,7 +9,7 @@ This document describes how to set up your development environment and build Col
 Before building the app, make sure you have the following installed:
 
 - **Java Development Kit**: JDK 21 (Adoptium Temurin, Azul Zulu, or OpenJDK)
-- **Android SDK**: Compile & Target SDK 35, Minimum SDK 26
+- **Android SDK**: Compile & Target SDK 36, Minimum SDK 26
 - **Android NDK**: Required for GeckoView native libraries
 - **IDE**: Android Studio (Ladybug or newer) or any code editor with Gradle support
 
