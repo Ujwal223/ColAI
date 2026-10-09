@@ -1,8 +1,23 @@
+import org.gradle.api.artifacts.CacheableRule
+import org.gradle.api.artifacts.ComponentMetadataContext
+import org.gradle.api.artifacts.ComponentMetadataRule
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+}
+
+@CacheableRule
+abstract class RemoveGmsDependenciesRule : ComponentMetadataRule {
+    override fun execute(context: ComponentMetadataContext) {
+        context.details.allVariants {
+            withDependencies {
+                removeAll { it.group == "com.google.android.gms" }
+            }
+        }
+    }
 }
 
 android {
@@ -143,11 +158,18 @@ android {
     }
 }
 
-configurations.all {
+configurations.configureEach {
     exclude(group = "com.google.android.gms")
+    exclude(group = "com.google.android.gms", module = "play-services-fido")
+    exclude(group = "com.google.android.gms", module = "play-services-tasks")
+    exclude(group = "com.google.android.gms", module = "play-services-basement")
 }
 
 dependencies {
+    components {
+        all<RemoveGmsDependenciesRule>()
+    }
+
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
     // AndroidX & Core

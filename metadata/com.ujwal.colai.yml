@@ -15,7 +15,7 @@ Repo: https://github.com/Ujwal223/ColAI.git
 Builds:
   - versionName: 2.0.0
     versionCode: 21
-    commit: v2.0.0
+    commit: b56d768d94a3a397176d303ca79020471b48ee9f
     subdir: app
     gradle:
       - yes
@@ -27,4 +27,3 @@ AutoUpdateMode: None
 UpdateCheckMode: None
 CurrentVersion: 2.0.0
 CurrentVersionCode: 21
-
