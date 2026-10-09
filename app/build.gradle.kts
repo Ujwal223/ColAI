@@ -1,6 +1,20 @@
+import java.util.zip.ZipEntry
+import java.util.zip.ZipFile
+import java.util.zip.ZipInputStream
+import java.util.zip.ZipOutputStream
 import org.gradle.api.artifacts.CacheableRule
 import org.gradle.api.artifacts.ComponentMetadataContext
 import org.gradle.api.artifacts.ComponentMetadataRule
+import org.gradle.api.artifacts.transform.InputArtifact
+import org.gradle.api.artifacts.transform.TransformAction
+import org.gradle.api.artifacts.transform.TransformOutputs
+import org.gradle.api.artifacts.transform.TransformParameters
+import org.gradle.api.artifacts.type.ArtifactTypeDefinition
+import org.gradle.api.attributes.Attribute
+import org.gradle.api.file.FileSystemLocation
+import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 
 plugins {
     alias(libs.plugins.android.application)
@@ -15,6 +29,48 @@ abstract class RemoveGmsDependenciesRule : ComponentMetadataRule {
         context.details.allVariants {
             withDependencies {
                 removeAll { it.group == "com.google.android.gms" }
+            }
+        }
+    }
+}
+
+abstract class StripGeckoWebAuthn : TransformAction<TransformParameters.None> {
+    @get:PathSensitive(PathSensitivity.NAME_ONLY)
+    @get:InputArtifact
+    abstract val inputArtifact: Provider<FileSystemLocation>
+
+    override fun transform(outputs: TransformOutputs) {
+        val input = inputArtifact.get().asFile
+        if (!input.name.startsWith("geckoview-omni")) {
+            outputs.file(input)
+            return
+        }
+        val drop = setOf(
+            "org/mozilla/geckoview/WebAuthnTokenManager.class",
+            "org/mozilla/gecko/util/WebAuthnUtils.class"
+        )
+        val target = outputs.file(input.name)
+        ZipFile(input).use { aar ->
+            ZipOutputStream(target.outputStream().buffered()).use { zo ->
+                for (e in aar.entries()) {
+                    zo.putNextEntry(ZipEntry(e.name))
+                    if (e.name == "classes.jar") {
+                        val jar = ZipOutputStream(zo)
+                        ZipInputStream(aar.getInputStream(e)).use { zi ->
+                            generateSequence { zi.nextEntry }.forEach { je ->
+                                if (je.name !in drop) {
+                                    jar.putNextEntry(ZipEntry(je.name))
+                                    zi.copyTo(jar)
+                                    jar.closeEntry()
+                                }
+                            }
+                        }
+                        jar.finish()
+                    } else if (!e.isDirectory) {
+                        aar.getInputStream(e).use { it.copyTo(zo) }
+                    }
+                    zo.closeEntry()
+                }
             }
         }
     }
@@ -158,14 +214,26 @@ android {
     }
 }
 
+val geckoStripped = Attribute.of("colai.geckoStripped", Boolean::class.javaObjectType)
+
 configurations.configureEach {
     exclude(group = "com.google.android.gms")
     exclude(group = "com.google.android.gms", module = "play-services-fido")
     exclude(group = "com.google.android.gms", module = "play-services-tasks")
     exclude(group = "com.google.android.gms", module = "play-services-basement")
+    if (isCanBeResolved) attributes.attribute(geckoStripped, true)
 }
 
 dependencies {
+    attributesSchema { attribute(geckoStripped) }
+    artifactTypes.maybeCreate("aar").attributes.attribute(geckoStripped, false)
+    registerTransform(StripGeckoWebAuthn::class.java) {
+        from.attribute(geckoStripped, false)
+            .attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, "aar")
+        to.attribute(geckoStripped, true)
+            .attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, "aar")
+    }
+
     components {
         all<RemoveGmsDependenciesRule>()
     }
