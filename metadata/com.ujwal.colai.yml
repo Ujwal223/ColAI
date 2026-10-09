@@ -8,21 +8,6 @@ IssueTracker: https://github.com/Ujwal223/ColAI/issues
 Changelog: https://github.com/Ujwal223/ColAI/releases
 
 AutoName: ColAI
-Summary: Multi-account containerized AI workspace with GeckoView
-Description: |-
-  ColAI is a native, privacy-first containerized AI workspace for running multiple accounts
-  of top AI services (ChatGPT, Claude, Gemini, DeepSeek, Grok, Perplexity) simultaneously
-  without cross-account data leakage.
-
-  Key Features:
-  - Mozilla GeckoView engine with strict container isolation (contextId)
-  - Biometric and 4-digit PIN locks per session with master recovery keys
-  - Per-account cookie, cache, and local storage purging
-  - Strict tracking protection and automatic anti-app popup suppression
-  - Downloads engine with MediaStore integration and file/media upload prompt delegates
-  - Android Share Intent target account routing
-  - In-memory GeckoSession state restoration across process death without reload
-  - Military-grade AES-256-GCM + PBKDF2 encrypted backup and restore
 
 RepoType: git
 Repo: https://github.com/Ujwal223/ColAI.git
