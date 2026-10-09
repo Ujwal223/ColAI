@@ -143,6 +143,10 @@ android {
     }
 }
 
+configurations.all {
+    exclude(group = "com.google.android.gms")
+}
+
 dependencies {
     coreLibraryDesugaring(libs.desugar.jdk.libs)
 
